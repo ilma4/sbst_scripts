@@ -14,7 +14,7 @@ RUNS_NUMBER=$2
 TIME_BUDGET=$3
 
 echo "$TOOL_NAME |>>>>> Running test generation $RUNS_NUMBER times with time-budget=$TIME_BUDGET"
-"$SCRIPT_DIR/contest_generate_tests.sh" "$TOOL_NAME" "$RUNS_NUMBER" 1 "$TIME_BUDGET" > generation_log.txt 2> error_generation_log.txt
+"contest_generate_tests.sh" "$TOOL_NAME" "$RUNS_NUMBER" 1 "$TIME_BUDGET" > generation_log.txt 2> error_generation_log.txt
 
 echo "$TOOL_NAME |>>>>> Running metrics collection"
 #contest_compute_metrics.sh "results_${TOOL_NAME}_${TIME_BUDGET}" > metrics_log.txt 2> error_metrics_log.txt

@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ "$(id -u)" != 0 ] ; then
+  echo "Script must be run as root"
+  exit 0;
+fi
+
 if [ $# -ne 4 ] && [ $# -ne 5 ]
 then
   echo "Usage: <tool-path> <benchmarks-path> <runs-number> <time-budget> [scripts-path]"
@@ -7,6 +12,11 @@ then
   echo "example: ~/kex-sbst ~/benchmarks11 3 60 ./sbst_scripts"
   exit 0;
 fi
+
+USER=$(stat -c '%u' "${BASH_SOURCE[0]}")
+GROUP=$(stat -c '%g' "${BASH_SOURCE[0]}")
+
+echo "User: $USER, group: $GROUP"
 
 TOOL_HOME=$1
 BENCH_PATH=$2
@@ -20,7 +30,7 @@ DOCKER_TOOL_HOME=/home/$TOOL_NAME
 DOCKER_SCRIPTS="/var/sbst_scripts"
 
 docker run --rm -d \
-  --user 1008:1008 \
+  --user $USER:$GROUP \
   -v "$TOOL_HOME":"$DOCKER_TOOL_HOME" \
   -v "$BENCH_PATH":/var/benchmarks:ro \
   -v "$SCRIPTS_PATH":"$DOCKER_SCRIPTS":ro \
