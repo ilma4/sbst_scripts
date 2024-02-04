@@ -31,9 +31,9 @@ DOCKER_SCRIPTS="/var/sbst_scripts"
 
 docker run --rm -d \
   --user $USER:$GROUP \
-  -v "$TOOL_HOME":"$DOCKER_TOOL_HOME" \
-  -v "$BENCH_PATH":/var/benchmarks:ro \
-  -v "$SCRIPTS_PATH":"$DOCKER_SCRIPTS":ro \
+  --mount type=bind,source="$(realpath "$TOOL_HOME")",target="$DOCKER_TOOL_HOME" \
+  --mount type=bind,source="$(realpath "$BENCH_PATH")",target=/var/benchmarks,readonly \
+  --mount type=bind,source="$(realpath "$SCRIPTS_PATH")",target="$DOCKER_SCRIPTS",readonly \
   --name="$TOOL_NAME" \
   -it junitcontest/infrastructure:latest > /dev/null
 
