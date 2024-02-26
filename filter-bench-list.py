@@ -27,7 +27,7 @@ pattern = re.compile(r'([\w\d-]+)=(\n)?\{(.*?)\}', re.DOTALL)
 key_value_pairs = pattern.findall(data_contents)
 
 # Filter key-value pairs based on the keys to preserve
-filtered_pairs = [f"{key}={{{value}\n}}" for key, value in key_value_pairs if key in keys_to_preserve]
+filtered_pairs = [f"{key}={{{value}\n}}" for key, _, value in key_value_pairs if key in keys_to_preserve]
 
 # Join filtered key-value pairs into the final string
 filtered_data = '{\n' + '\n'.join(filtered_pairs) + '\n}'
