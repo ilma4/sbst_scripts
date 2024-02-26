@@ -7,9 +7,9 @@ fi
 
 if [ $# -ne 4 ] && [ $# -ne 5 ]
 then
-  echo "Usage: <tool-path> <benchmarks-path> <runs-number> <time-budget> [scripts-path]"
+  echo "Usage: <tool-path> <benchmarks-path> [runs-number] [time-budget]"
   echo "example: ~/evokex ~/my-benchmarks 3 60"
-  echo "example: ~/kex-sbst ~/benchmarks11 3 60 ./sbst_scripts"
+  echo "example: ./kex-sbst ./benchmarks11 3 60"
   exit 0;
 fi
 
@@ -20,9 +20,10 @@ echo "User: $USER, group: $GROUP"
 
 TOOL_HOME=$1
 BENCH_PATH=$2
-RUNS_NUMBER=$3
-TIME_BUDGET=$4
-SCRIPTS_PATH=${5:-"./sbst_scripts"}
+RUNS_NUMBER=${3:-1}
+TIME_BUDGET=${4:-120}
+
+SCRIPTS_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 TOOL_NAME=$(basename "$TOOL_HOME")
 DOCKER_TOOL_HOME=/home/$TOOL_NAME

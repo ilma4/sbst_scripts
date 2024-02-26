@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Check if argument was provided
-if [ "$#" -ne 2 ]; then
+if [ "$#" -ne 1 ]; then
     echo "Usage: $0 <directory_path>"
     exit 1
 fi
