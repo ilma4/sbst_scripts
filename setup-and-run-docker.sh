@@ -18,8 +18,8 @@ GROUP=$(stat -c '%g' "${BASH_SOURCE[0]}")
 
 echo "User: $USER, group: $GROUP"
 
-TOOL_HOME=$1
-BENCH_PATH=$2
+TOOL_HOME="$(realpath $1)"
+BENCH_PATH="$(realpath $2)"
 RUNS_NUMBER=${3:-1}
 TIME_BUDGET=${4:-120}
 
