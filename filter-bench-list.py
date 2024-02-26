@@ -21,7 +21,7 @@ with open(data_file, 'r') as f:
     data_contents = f.read()
 
 # Regex pattern to match blocks in the structured data file
-pattern = re.compile(r'([\w\d-]+)=\{(.*?)\}', re.DOTALL)
+pattern = re.compile(r'([\w\d-]+)=(\n)?\{(.*?)\}', re.DOTALL)
 
 # Extract all key-value pairs
 key_value_pairs = pattern.findall(data_contents)
